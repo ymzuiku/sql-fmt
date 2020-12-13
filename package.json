@@ -1,0 +1,28 @@
+{
+  "name": "sql-fmt",
+  "version": "1.0.2",
+  "main": "mysql/mysql.js",
+  "types": "mysql/mysql.d.ts",
+  "description": "Simple SQL escape and format for MySQL and Postgres and easy create Ojbect to SQL",
+  "private": false,
+  "scripts": {
+    "lib": "node rollup.config.js"
+  },
+  "devDependencies": {
+    "rollup": "^1.24.0",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "rollup-plugin-uglify": "^6.0.3",
+    "typescript": "3.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ymzuiku/sql-fmt.git"
+  },
+  "bugs": {
+    "url": "git+https://github.com/ymzuiku/sql-fmt.git"
+  },
+  "homepage": "git+https://github.com/ymzuiku/sql-fmt.git",
+  "dependencies": {
+    "sqlutils": "^1.2.0"
+  }
+}
