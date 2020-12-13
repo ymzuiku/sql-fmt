@@ -1,6 +1,6 @@
 # sql-fmt
 
-> Base by sqlstring and sqlutils
+> Base by [sqlstring](https://www.npmjs.com/package/sqlutils) and [sqlutils](https://github.com/mysqljs/sqlstring)
 
 Simple SQL escape and format for MySQL \ Postgres and easy create Ojbect to SQL, support typescript.
 
