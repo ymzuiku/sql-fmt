@@ -4,10 +4,10 @@
 
 Simple SQL escape and format for MySQL \ Postgres and easy create Ojbect to SQL, support typescript.
 
-- sql.escape: Use `sqlstring` escape SQL string
-- sql.values: Format and escape JS `{ key : value }` to SQL `(key1, key2) VALUES (value1, value2)`
-- sql.where: Format and escape JS `{ key : value }` to SQL `(key1='value1' AND key2='value2')`
-- sql.set: Format and escape JS `{ key : value }` to SQL `key1='value1', key2='value2'`
+- **sql.escape**: Use `sqlstring` escape SQL string
+- **sql.values**: Format and escape JS `{ key : value }` to SQL `(key1, key2) VALUES (value1, value2)`
+- **sql.where**: Format and escape JS `{ key : value }` to SQL `(key1='value1' AND key2='value2')`
+- **sql.set**: Format and escape JS `{ key : value }` to SQL `key1='value1', key2='value2'`
 
 ## Install
 
