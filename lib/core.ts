@@ -21,6 +21,9 @@ export const core = (format: any, where: any, escape: any) => {
       const v = rest[i];
       const lowS = s.toLocaleLowerCase();
       const len = lowS.length;
+      const where = lowS.lastIndexOf("where");
+      const updateSet = lowS.lastIndexOf("set");
+      const insert = lowS.lastIndexOf("insert into");
       if (v !== void 0) {
         const kind = typeof v;
         if (simpleMap[kind]) {
@@ -29,11 +32,11 @@ export const core = (format: any, where: any, escape: any) => {
           } else {
             out += sql.escape(v);
           }
-        } else if (lowS.lastIndexOf("where") > len - 7) {
+        } else if (where > 0 && where > len - 7) {
           out += sql.where(v);
-        } else if (lowS.lastIndexOf("set") > len - 5) {
+        } else if (updateSet > 0 && updateSet > len - 5) {
           out += sql.set(v);
-        } else if (lowS.indexOf("insert into") > -1) {
+        } else if (insert > -1) {
           out += sql.set(v);
         }
       }
