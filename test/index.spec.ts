@@ -3,8 +3,13 @@ import sql from "../lib/mysql";
 describe("test mysql", () => {
   test("set", () => {
     const str = sql`SELECT * FROM users WHERE name=${"'hello' and 1=1"}`;
-    console.log(str);
     expect(str).toMatch(/name='\\'hello\\'/);
+  });
+
+  test("set # string", () => {
+    const str = sql`SELECT * FROM users ${"#where name = '20' and 1=1"}`;
+    console.log(str);
+    expect(str).toMatch(/where name = '20'/);
   });
 
   test("template SET", () => {
@@ -32,7 +37,6 @@ describe("test mysql", () => {
       name: "hello",
       age: [20, 30],
     }}`;
-    console.log(str);
     expect(str).toMatch(/name='hello' AND/);
   });
 });

@@ -24,7 +24,11 @@ export const core = (format: any, where: any, escape: any) => {
       if (v !== void 0) {
         const kind = typeof v;
         if (simpleMap[kind]) {
-          out += sql.escape(v);
+          if (v[0] === "#") {
+            out += v.replace("#", "");
+          } else {
+            out += sql.escape(v);
+          }
         } else if (lowS.lastIndexOf("where") > len - 7) {
           out += sql.where(v);
         } else if (lowS.lastIndexOf("set") > len - 5) {

@@ -61,6 +61,15 @@ console.log(
 //out: UPDATE users SET dog='ff',age=20 where (name='apple');
 ```
 
+No escape insert string, but need alert to SQL injection:
+
+use `#` start string, sql-fmt can remove `#` before insert.
+
+```js
+console.log(sql`SELECT * FROM users ${"#where name = '20' and 1=1"}`);
+//out: SELECT * FROM users where name = '20' and 1=1
+```
+
 # API
 
 Auto use sql template insert `where`\ `set` \ `values` \ `escape` in string template
