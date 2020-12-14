@@ -12,6 +12,6 @@ declare const sql: {
         [key: string]: string | number | (string | number)[];
     }): any;
     escape: (value: string) => string;
-    createQuery<T>(query: T): T;
+    createQuery<T extends Function>(query: T): (...args: any[]) => any;
 };
 export default sql;

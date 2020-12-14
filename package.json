@@ -1,6 +1,6 @@
 {
   "name": "sql-fmt",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "mysql/mysql.js",
   "types": "mysql/mysql.d.ts",
   "description": "Simple SQL escape and format for MySQL and Postgres and easy create Ojbect to SQL",

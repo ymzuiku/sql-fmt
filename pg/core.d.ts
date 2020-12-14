@@ -13,6 +13,6 @@ export declare const core: (format: any, where: any, escape: any) => {
         [key: string]: string | number | (string | number)[];
     }): any;
     escape: Escape;
-    createQuery<T>(query: T): T;
+    createQuery<T extends Function>(query: T): (...args: any[]) => any;
 };
 export {};

@@ -60,9 +60,8 @@ export const core = (format: any, where: any, escape: any) => {
     return str.replace("WHERE ", "").trim();
   };
   sql.escape = escape as Escape;
-  sql.createQuery = <T>(query: T): T => {
-    const out = (...args: any[]) => (query as any)(sql(...args));
-    return out as any;
+  sql.createQuery = <T extends Function>(query: T) => {
+    return (...args: any[]) => query(sql(...args));
   };
 
   return sql;
