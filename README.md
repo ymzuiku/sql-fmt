@@ -27,6 +27,44 @@ or use Postgres
 const sql = require("sql-fmt/pg"); // Postgres
 ```
 
+# Use
+
+Single word:
+
+```js
+console.log(sql`SELECT * FROM users WHERE name=${"'hello' and 1=1"};`);
+//out: SELECT * FROM users WHERE name='\'hello\' and 1=1'
+```
+
+Where:
+
+```js
+console.log(sql`SELECT * FROM users WHERE ${{ name: "hello", age: [20, 30] }}`);
+//out: SELECT * FROM users WHERE (name='hello' AND (age=20 OR age=30))
+```
+
+Insert:
+
+```js
+console.log(sql`INSERT INTO users ${{ dog: "ff", age: 20 }};`);
+//out: INSERT INTO users (dog,age) VALUES ('ff',20);
+```
+
+Update set:
+
+```js
+console.log(
+  sql`UPDATE users SET ${{ dog: "ff", age: 20 }} where ${{
+    name: "apple",
+  }};`
+);
+//out: UPDATE users SET dog='ff',age=20 where (name='apple');
+```
+
+# API
+
+Auto use sql template insert `where`\ `set` \ `values` \ `escape` in string template
+
 ## sql.escape
 
 ```js
@@ -73,4 +111,15 @@ console.log(
   })};`
 );
 //out: UPDATE users SET dog='ff',age=20 where (name='apple');
+```
+
+## sql.createQuery
+
+Cache mysql.query or pg.query and use sql template
+
+```js
+const query = sql.createQuery(mysql.query);
+
+console.log(query`INSERT INTO users ${{ dog: "ff", age: 20 }};`);
+//out: INSERT INTO users (dog,age) VALUES ('ff',20);
 ```
