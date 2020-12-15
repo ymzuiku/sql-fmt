@@ -1,11 +1,12 @@
 # sql-fmt
 
-> Base by [sqlstring](https://www.npmjs.com/package/sqlutils) and [sqlutils](https://github.com/mysqljs/sqlstring)
+> Base by [sqlstring](https://www.npmjs.com/package/sqlutils)
 
-Simple SQL escape and format for MySQL \ Postgres and easy create Ojbect to SQL, support typescript.
+Simple SQL escape and format for MySQL easy create Ojbect to SQL, support typescript.
 
 - **sql.escape**: Use `sqlstring` escape SQL string
-- **sql.values**: Format and escape JS `{ key : value }` to SQL `(key1, key2) VALUES (value1, value2)`
+- **sql.values**: Format and escape JS `['dog', 20]` to SQL `('dog', 20`
+- **sql.insert**: Format and escape JS `{ key : value }` to SQL `(key1, key2) VALUES (value1, value2)`
 - **sql.where**: Format and escape JS `{ key : value }` to SQL `(key1='value1' AND key2='value2')`
 - **sql.set**: Format and escape JS `{ key : value }` to SQL `key1='value1', key2='value2'`
 
@@ -15,42 +16,44 @@ Simple SQL escape and format for MySQL \ Postgres and easy create Ojbect to SQL,
 $ npm install sql-fmt
 ```
 
-In javascript use MySQL
-
 ```js
-const sql = require("sql-fmt"); // MySQL
-```
-
-or use Postgres
-
-```js
-const sql = require("sql-fmt/pg"); // Postgres
+const sql = require("sql-fmt");
 ```
 
 # Use
 
-Single word:
+## Auto Single word:
 
 ```js
+console.log(sql`SELECT * FROM users WHERE name=${"hello"};`);
+//out: SELECT * FROM users WHERE name='hello'
+
 console.log(sql`SELECT * FROM users WHERE name=${"'hello' and 1=1"};`);
 //out: SELECT * FROM users WHERE name='\'hello\' and 1=1'
 ```
 
-Where:
+Ignore escape Single word, add #:
+
+```js
+console.log(sql`SELECT * FROM users WHERE name=#${"hello"};`);
+//out: SELECT * FROM users WHERE name='hello'
+```
+
+## Auto WHERE:
 
 ```js
 console.log(sql`SELECT * FROM users WHERE ${{ name: "hello", age: [20, 30] }}`);
 //out: SELECT * FROM users WHERE (name='hello' AND (age=20 OR age=30))
 ```
 
-Insert:
+## Auto INSTER:
 
 ```js
 console.log(sql`INSERT INTO users ${{ dog: "ff", age: 20 }};`);
 //out: INSERT INTO users (dog,age) VALUES ('ff',20);
 ```
 
-Update set:
+## Auto UPDATE SET:
 
 ```js
 console.log(
@@ -75,14 +78,28 @@ console.log(`SELECT * FROM users WHERE name=${sql.escape("'hello' OR 1=1")}`);
 //out: SELECT * FROM users WHERE name='\'hello\' OR 1=1';
 ```
 
+## sql.escapeId
+
+```js
+console.log(`SELECT * FROM users WHERE ${sql.escapeId("name")}='hello';`);
+//out: SELECT * FROM users WHERE `name`='hello';
+```
+
 ## sql.values
 
 ```js
-console.log(`INSERT INTO users ${sql.values({ dog: "ff", age: 20 })};`);
+console.log(`INSERT INTO users (dog, age) values (${sql.insert(['ff', 20]);`);
+//out: INSERT INTO users (dog, age) VALUES ('ff',20);
+```
+
+## sql.insert
+
+```js
+console.log(`INSERT INTO users ${sql.insert({ dog: "ff", age: 20 })};`);
 //out: INSERT INTO users (dog,age) VALUES ('ff',20);
 
 console.log(
-  `INSERT INTO users ${sql.values([
+  `INSERT INTO users ${sql.insert([
     { dog: "aa", age: 10 },
     { dog: "bb", age: 20 },
   ])};`
@@ -111,15 +128,4 @@ console.log(
   })};`
 );
 //out: UPDATE users SET dog='ff',age=20 where (name='apple');
-```
-
-## sql.createQuery
-
-Cache mysql.query or pg.query and use sql template
-
-```js
-const query = sql.createQuery(mysql.query);
-
-console.log(query`INSERT INTO users ${{ dog: "ff", age: 20 }};`);
-//out: INSERT INTO users (dog,age) VALUES ('ff',20);
 ```

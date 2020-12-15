@@ -33,31 +33,16 @@ clearDir(pwd("umd"));
 
 const watchOptions = [
   {
-    input: "./lib/mysql.ts",
+    external: ["sqlstring"],
+    input: "./lib/index.ts",
     output: {
-      file: "./mysql/mysql.js",
+      file: "./umd/index.js",
       format: "umd",
-      name: "fmt",
+      name: "sql",
       sourcemap: true,
-      globals: {},
-    },
-    plugins: [
-      rollupTypescript({
-        useTsconfigDeclarationDir: false,
-      }),
-      uglify({
-        sourcemap: true,
-      }),
-    ],
-  },
-  {
-    input: "./lib/pg.ts",
-    output: {
-      file: "./pg/pg.js",
-      format: "umd",
-      name: "fmt",
-      sourcemap: true,
-      globals: {},
+      globals: {
+        sqlstring: "SqlString",
+      },
     },
     plugins: [
       rollupTypescript({
