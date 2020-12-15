@@ -1,16 +1,9 @@
 {
   "name": "sql-fmt",
-<<<<<<< HEAD
-  "version": "1.2.4",
-  "main": "mysql/mysql.js",
-  "types": "mysql/mysql.d.ts",
-  "description": "Simple SQL escape and format for MySQL and Postgres and easy create Ojbect to SQL",
-=======
   "version": "2.0.0",
   "main": "umd/index.js",
   "types": "umd/index.d.ts",
   "description": "Simple MySQL escape and format for MySQL easy create Ojbect to SQL",
->>>>>>> feature/use-sql-string
   "private": false,
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
