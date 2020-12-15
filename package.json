@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "main": "umd/index.js",
   "types": "umd/index.d.ts",
-  "description": "Simple SQL escape and format for MySQL easy create Ojbect to SQL",
+  "description": "Simple MySQL escape and format for MySQL easy create Ojbect to SQL",
   "private": false,
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
