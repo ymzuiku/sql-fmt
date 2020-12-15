@@ -1,6 +1,6 @@
 {
   "name": "sql-fmt",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "umd/index.js",
   "types": "umd/index.d.ts",
   "description": "Simple MySQL escape and format for MySQL easy create Ojbect to SQL",
