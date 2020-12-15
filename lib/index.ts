@@ -10,7 +10,7 @@ const simpleMap = {
   number: 1,
 } as any;
 
-const sql = (...args: any[]) => {
+function sql(...args: any[]) {
   const [str, ...rest] = args;
   let out = "";
 
@@ -51,7 +51,7 @@ const sql = (...args: any[]) => {
     }
   });
   return out;
-};
+}
 
 sql.insert = insert;
 sql.where = where;
@@ -62,28 +62,3 @@ sql.escapeId = SqlString.escapeId;
 sql.format = SqlString.format;
 
 export default sql;
-
-/*
-sql`insert into fmt ${[
-  { name: "dog", age: 10 },
-  { name: "dog2", age: 20 },
-]}`;
-
-sql`insert into fmt ${[
-  { name: "dog", age: 10 },
-  { name: "dog2", age: 20 },
-]}`;
-
-sql`fish, cat -> select name, age, fish from fmt where ${{
-  name: "dog",
-  age: [20, 50],
-}}`;
-
-sql`dog, fish -> select name, age, fish from fmt where ${{
-  "fish.name": "dog.bate",
-  "fish.name2": "dog.bate",
-  age: [20, 50],
-}}`;
-
-sql`update fmt set ${{ name: "dog", age: 20 }}`;
-*/
