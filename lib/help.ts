@@ -1,6 +1,6 @@
 import * as SqlString from "sqlstring";
 
-interface IHelp extends String {
+export interface IHelp extends String {
   comment: (str: string) => IHelp;
   engine: () => IHelp;
   default: (str: string) => IHelp;
@@ -27,7 +27,7 @@ interface IHelp extends String {
 
 export const sqlHelpKey = "sql" + Date.now();
 
-export function help(str = ""): IHelp {
+function _help(str = ""): IHelp {
   const code = new String(str) as any;
   code.sqlHelpKey = sqlHelpKey;
 
@@ -70,3 +70,5 @@ export function help(str = ""): IHelp {
 
   return code;
 }
+
+export const help = _help();

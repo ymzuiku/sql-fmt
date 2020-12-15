@@ -3,6 +3,7 @@ import { values } from "./values";
 import { updateSet } from "./updateSet";
 import { insert } from "./insert";
 import { where } from "./where";
+import { help, sqlHelpKey } from "./help";
 
 const simpleMap = {
   string: 1,
@@ -26,7 +27,9 @@ function sql(...args: any[]) {
     const str = lowS.lastIndexOf("#");
     if (v !== void 0) {
       const kind = typeof v;
-      if (simpleMap[kind]) {
+      if (v.sqlHelpKey === sqlHelpKey) {
+        out += v;
+      } else if (simpleMap[kind]) {
         if (str > -1 && str >= len - 1) {
           out += v;
         } else {
@@ -60,5 +63,6 @@ sql.set = updateSet;
 sql.escape = SqlString.escape;
 sql.escapeId = SqlString.escapeId;
 sql.format = SqlString.format;
+sql.h = help;
 
 export default sql;
