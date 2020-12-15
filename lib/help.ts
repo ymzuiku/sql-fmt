@@ -32,7 +32,7 @@ function _help(str = ""): IHelp {
   code.sqlHelpKey = sqlHelpKey;
 
   const add = (s: string) => {
-    return help(code + " " + s);
+    return _help(code + " " + s);
   };
 
   const obj = {
@@ -60,7 +60,7 @@ function _help(str = ""): IHelp {
       add(
         `create_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, update_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`
       ),
-    primary: (str: string) => add(`primary(${str})`),
+    primary: (str: string) => add(`primary key(${str})`),
     unique: (...args: string[]) => add(`unique(${args.join(",")})`),
     key: (...args: string[]) =>
       add(`key index_${args.join("_")}(${args.join(",")})`),
