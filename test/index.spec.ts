@@ -1,6 +1,12 @@
 import sql from "../lib/mysql";
 
 describe("test mysql", () => {
+  test("insert into", () => {
+    const str = sql`insert into dog ${{ dog: "dipu", age: 20 }}`;
+    console.log(str);
+    expect(str).toMatch(/name='\\'hello\\'/);
+  });
+
   test("set", () => {
     const str = sql`SELECT * FROM users WHERE name=${"'hello' and 1=1"}`;
     expect(str).toMatch(/name='\\'hello\\'/);
